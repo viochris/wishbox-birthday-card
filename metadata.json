@@ -1,0 +1,6 @@
+{
+  "name": "WishBox — Interactive Birthday Card",
+  "description": "A warm, interactive 4-step birthday celebration experience featuring a candle ritual, gift unwrapping, confetti animations, ambient music, and a heartfelt letter.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,2 +1,20 @@
-# wishbox-birthday-card
-A short, festive interactive birthday web card, vibe-coded in Google AI Studio with Gemini. Walks the recipient through making a wish, blowing a candle, unwrapping a gift box, and reading a personal letter with confetti, balloons, Lyria music, and TTS read-aloud. Simple and relationship-agnostic. Pure client-side React, no backend.
+<div align="center">
+<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
+</div>
+
+# Run and deploy your AI Studio app
+
+This contains everything you need to run your app locally.
+
+View your app in AI Studio: https://ai.studio/apps/0e74d748-8f73-41c9-bfa1-64bb5795c334
+
+## Run Locally
+
+**Prerequisites:**  Node.js
+
+
+1. Install dependencies:
+   `npm install`
+2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
+3. Run the app:
+   `npm run dev`

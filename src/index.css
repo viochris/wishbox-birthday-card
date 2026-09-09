@@ -1,0 +1,118 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+}
+
+.font-serif-title {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.font-handwriting {
+  font-family: 'Caveat', cursive, sans-serif;
+}
+
+@keyframes float-slow {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-16px) rotate(3deg);
+  }
+}
+
+@keyframes float-reverse {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(-4deg);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(244, 114, 182, 0.4), 0 0 30px rgba(251, 191, 36, 0.25);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(244, 114, 182, 0.7), 0 0 45px rgba(251, 191, 36, 0.45);
+  }
+}
+
+@keyframes flame-flicker {
+  0%, 100% {
+    transform: scale(1, 1) rotate(-1.5deg) skewX(-1deg);
+    filter: drop-shadow(0 0 8px rgba(251, 191, 36, 0.75));
+    opacity: 0.95;
+  }
+  25% {
+    transform: scale(1.05, 0.96) rotate(1.5deg) skewX(1deg);
+    filter: drop-shadow(0 0 11px rgba(251, 191, 36, 0.85));
+    opacity: 1;
+  }
+  50% {
+    transform: scale(0.96, 1.04) rotate(-2deg) skewX(-1.5deg);
+    filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.7));
+    opacity: 0.92;
+  }
+  75% {
+    transform: scale(1.04, 0.98) rotate(2deg) skewX(1.5deg);
+    filter: drop-shadow(0 0 10px rgba(251, 191, 36, 0.9));
+    opacity: 0.98;
+  }
+}
+
+@keyframes flame-flicker-intense {
+  0%, 100% {
+    transform: scale(1.06, 1.02) rotate(-4deg) skewX(-3.5deg);
+    filter: drop-shadow(0 0 16px rgba(251, 191, 36, 0.95)) drop-shadow(0 0 24px rgba(245, 158, 11, 0.6));
+    opacity: 1;
+  }
+  20% {
+    transform: scale(1.18, 0.88) rotate(4.5deg) skewX(4deg);
+    filter: drop-shadow(0 0 22px rgba(251, 191, 36, 1)) drop-shadow(0 0 30px rgba(244, 114, 182, 0.5));
+    opacity: 0.94;
+  }
+  40% {
+    transform: scale(0.92, 1.15) rotate(-5deg) skewX(-4.5deg);
+    filter: drop-shadow(0 0 14px rgba(251, 191, 36, 0.9));
+    opacity: 0.88;
+  }
+  60% {
+    transform: scale(1.2, 0.92) rotate(5deg) skewX(4.5deg);
+    filter: drop-shadow(0 0 24px rgba(251, 191, 36, 1)) drop-shadow(0 0 32px rgba(251, 191, 36, 0.8));
+    opacity: 1;
+  }
+  80% {
+    transform: scale(0.94, 1.1) rotate(-3.5deg) skewX(-3deg);
+    filter: drop-shadow(0 0 18px rgba(245, 158, 11, 0.85));
+    opacity: 0.92;
+  }
+}
+
+.animate-float-1 {
+  animation: float-slow 6s ease-in-out infinite;
+}
+
+.animate-float-2 {
+  animation: float-reverse 7s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2.5s ease-in-out infinite;
+}
+
+.animate-flame {
+  animation: flame-flicker 0.65s ease-in-out infinite;
+  transform-origin: bottom center;
+  transition: filter 0.3s ease;
+}
+
+.group:hover .group-hover-flame-intense,
+.animate-flame:hover,
+.animate-flame-intense {
+  animation: flame-flicker-intense 0.28s ease-in-out infinite !important;
+  transform-origin: bottom center;
+}
