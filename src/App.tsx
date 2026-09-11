@@ -10,6 +10,7 @@ import { getInitialLetterContent } from './data/letterData';
 import { soundEngine } from './utils/soundEngine';
 
 import { HeaderControls } from './components/HeaderControls';
+import { PersonalizeModal } from './components/PersonalizeModal';
 import { FloatingDecorations } from './components/FloatingDecorations';
 import { ScreenCover } from './components/ScreenCover';
 import { ScreenWish } from './components/ScreenWish';
@@ -18,7 +19,8 @@ import { ScreenLetter } from './components/ScreenLetter';
 
 export default function App() {
   const [currentStep, setCurrentStep] = useState<ScreenStep>('cover');
-  const [letterContent] = useState<LetterContent>(getInitialLetterContent);
+  const [letterContent, setLetterContent] = useState<LetterContent>(getInitialLetterContent);
+  const [isPersonalizeOpen, setIsPersonalizeOpen] = useState(false);
   const [isMusicPlaying, setIsMusicPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
 
@@ -32,6 +34,30 @@ export default function App() {
     const newMute = !isMuted;
     setIsMuted(newMute);
     soundEngine.setMute(newMute);
+  };
+
+  // Personalization updates
+  const handleSavePersonalize = (updated: Partial<LetterContent>) => {
+    setLetterContent(prev => {
+      const nextContent = {
+        ...prev,
+        ...updated
+      };
+      // Keep URL search params updated so current link/bookmarks stay synchronized
+      try {
+        const url = new URL(window.location.href);
+        if (nextContent.recipientName) {
+          url.searchParams.set('to', nextContent.recipientName);
+        }
+        if (nextContent.senderSignature) {
+          url.searchParams.set('from', nextContent.senderSignature);
+        }
+        window.history.replaceState(null, '', url.toString());
+      } catch {
+        // Safe fallback in sandboxed iframes
+      }
+      return nextContent;
+    });
   };
 
   // Step transitions
@@ -57,12 +83,21 @@ export default function App() {
       {/* Background Floating Balloons, Sparkles & Ambient Glow */}
       <FloatingDecorations density={currentStep === 'letter' ? 'high' : 'normal'} />
 
-      {/* Top Floating Header Controls (Music toggle, Mute) */}
+      {/* Top Floating Header Controls (Personalize, Music toggle, Mute) */}
       <HeaderControls
         isMusicPlaying={isMusicPlaying}
         isMuted={isMuted}
         onToggleMusic={handleToggleMusic}
         onToggleMute={handleToggleMute}
+        onOpenPersonalize={() => setIsPersonalizeOpen(true)}
+      />
+
+      {/* Personalize Modal */}
+      <PersonalizeModal
+        isOpen={isPersonalizeOpen}
+        onClose={() => setIsPersonalizeOpen(false)}
+        letterContent={letterContent}
+        onSave={handleSavePersonalize}
       />
 
       {/* Main 4-Screen Step Sequence Container */}
